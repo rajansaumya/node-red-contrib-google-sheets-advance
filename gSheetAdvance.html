@@ -1,0 +1,190 @@
+<script type="text/javascript">
+    RED.nodes.registerType('GSheetAdvance', {
+        category: 'function',
+        color: '#0da95f',
+        defaults: {
+            creds: { value: "", type: "gauth" },
+            method: { value: "" },
+            action: { value: "" },
+            sheet: { value: "" },
+            cells: { value: "" },
+            flatten: {},
+            name: { value: "" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "font-awesome/fa-table",
+        label: function() {
+            return this.name || "GSheet - " + this.method.charAt(0).toUpperCase() + this.method.slice(1);
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="GSheetAdvance">
+    <div class="form-row">
+        <label for="node-input-creds">Creds</label>
+        <input type="text" id="node-input-creds">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-method">Method</label>
+        <select type="text" id="node-input-method" style="width: 70%;">
+            <option value="get">Get Cells</option>
+            <option value="append">Append Row</option>
+            <option value="update">Update Cells</option>
+            <option value="clear">Clear Cells</option>
+            <option value="createSheet">Add Sheet</option>
+            <option value="deleteSheet">Remove Sheet</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-sheet">SpreadsheetID</label>
+        <input type="text" id="node-input-sheet" placeholder="Spreadsheet ID">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-cells">Cells</label>
+        <input type="text" id="node-input-cells" placeholder="Sheet1!A1:B2">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-flatten"><i class="icon-tag"></i>Flatten Matrix</label>
+        <input type="checkbox" id="node-input-flatten">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="label">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="GSheetAdvance">
+    <p>Read and Write Google Sheets data.</p>
+
+    <h3>Details</h3>
+
+    <h4>SpreadsheetID</h4>
+    <p>The sheet ID can be found in the URL of your Google sheet. For example, in <code>https://docs.google.com/spreadsheets/d/1UuVIH2O38XK0TfPMGHk0HG_ixGLtLk6WoBKh4YSrDm4/edit#gid=0</code>,
+    the ID would be <code>1UuVIH2O38XK0TfPMGHk0HG_ixGLtLk6WoBKh4YSrDm4</code>. If you want to specify the tab of the worksheet (e.g., Sheet1, Sheet2, etc.), this is part of the cells config.</p>
+
+    <h4>Cells</h4>
+    <p>Google Sheets uses the following syntax to reference a tab and cells of the worksheet. The format is <code>Sheet1!A1:C3</code>, where Sheet1 is the Sheet name followed by a ! then the grid of the first cell (e.g., A1), then a : and finally the grid of the last cell (e.g., C3).</p>
+    <p>A range of cells can be a Row at A1:A5, a Column A1:E1, or even a block such as A1:C3.</p>
+
+    <h4>Flatten Matrix</h4>
+    <p>If you fetch multiple rows and columns, you end up with a 'matrix' that is an array of arrays, or even if you fetch a single column, you end up with an array of single value arrays.
+    The easiest way to see it is to fetch a column like A1:A5. Without flatten enabled, you will get back [[A1],[A2],[A3],[A4],[A5]] instead of [A1,A2,A3,A4,A5].</p>
+
+    <h4>Add Sheet</h4>
+    <p>Simply pass the desired name for the sheet to be added from the workbook in <code>msg.cells</code>.</p>
+
+    <h4>Remove Sheet</h4>
+    <p>To remove a sheet from the workbook, <code>gid</code> if the desired sheet must be provided, example : <code>https://docs.google.com/spreadsheets/d/1VNwh8mkh5AruBkzdj46Tvjaes2d16OrtY8uNidY8Dhw/edit#gid=1342222962</code></p>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">string | array</span>
+        </dt>
+        <dd>The data to be written to the sheet at the specified cells. A string will write to a single cell, an array will write a row, and a matrix will write multiple rows.</dd>
+        <dt>sheet
+            <span class="property-type">string</span>
+        </dt>
+        <dd>If the Sheet ID is not specified in the config, it can be set here.</dd>
+        <dt>cells
+            <span class="property-type">string</span>
+        </dt>
+        <dd>If the Cells are not specified in the config, they can be set here.</dd>
+    </dl>
+
+    <h3>Output</h3>
+    <h4>Get Cells</h4>
+    <p>For a Get Cells method, the payload will contain the requested cell data as follows:</p>
+    <ul>
+        <li>If a single cell is requested, <code>msg.payload</code> will contain the value of that cell.</li>
+        <li>If a single row or column is requested, <code>msg.payload</code> will contain an array of values for that row/column.</li>
+        <li>If both row and columns are requested, <code>msg.payload</code> will contain nested arrays (a matrix) as columns.</li>
+    </ul>
+
+    <h4>Append Row or Update Cells</h4>
+    <p>For update or append methods, the payload contains data about the cells that have been updated.</p>
+    <dl class="message-properties">
+        <dt>spreadsheetId
+            <span class="property-type">string</span>
+        </dt>
+        <dd>The ID of the Spreadsheet that has been updated.</dd>
+        <dt>updatedRange
+            <span class="property-type">string</span>
+        </dt>
+        <dd>The Tab and Cells that have been updated.</dd>
+        <dt>updatedRows
+            <span class="property-type">int</span>
+        </dt>
+        <dd>Number of Rows Updated.</dd>
+        <dt>updatedColumns
+            <span class="property-type">int</span>
+        </dt>
+        <dd>Number of Columns Updated.</dd>
+        <dt>updatedCells
+            <span class="property-type">int</span>
+        </dt>
+        <dd>Number of Cells Updated.</dd>
+    </dl>
+
+    <h4>Clear Cells</h4>
+    <p>For a Clear method, the response just contains the SpreadsheetID and Range that has been cleared.</p>
+    <dl class="message-properties">
+        <dt>spreadsheetId
+            <span class="property-type">string</span>
+        </dt>
+        <dd>The ID of the Spreadsheet that has been updated.</dd>
+        <dt>clearedRange
+            <span class="property-type">string</span>
+        </dt>
+        <dd>The Tab and Cells that have been cleared.</dd>
+    </dl>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('gauthAdv', {
+        category: 'config',
+        credentials: {
+            creds: {},
+        },
+        defaults: {
+            name: {}
+        },
+        label: function() {
+            return this.name || "Unknown";
+        },
+        oneditsave: function() {
+            var creds = document.getElementById('node-config-input-creds').value;
+            try {
+                var auth = JSON.parse(creds);
+                this.name = auth.client_email;
+            } catch {
+                this.name = "Unknown";
+            }
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="gauthAdv">
+    <div class="form-row">
+        <label for="node-config-input-authtoken">Creds</label>
+        <textarea rows="15" cols="120" id="node-config-input-creds" placeholder="Google Service Accounts Credentials JSON"></textarea>
+        <input type="hidden" id="node-input-name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="gauthAdv">
+    <p>Google Creds</p>
+    <h3>Details</h3>
+    <p>Copy JSON object for a Google Service Account Here.</p>
+    <p>Create a new service account from <a target="new" href="https://console.cloud.google.com/iam-admin/serviceaccounts?_ga=2.184919274.-272657095.1578084478"> This Link</a><br>
+    Download a JSON credentials object for the service account.
+    Give that account access to the sheets API.
+    Share your sheet with the email address of the service account e.g., <code>nodered@nodered-12345.iam.gserviceaccount.com</code>
+    </p>
+</script>

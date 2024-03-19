@@ -1,0 +1,25 @@
+{
+    "name": "node-red-contrib-google-sheets-advance",
+    "version": "0.0.2",
+    "description": "nodered node to get, update, append, clear and add/remove sheet to workbook google sheets.",
+    "author": "Saumya Rajan",
+    "license": "MIT",
+    "engines": {
+        "node": ">=12.0.0"
+    },
+    "keywords": [
+        "node-red",
+        "gsuite",
+        "google sheets",
+        "gSheetAdvance"
+    ],
+    "node-red": {
+        "nodes": {
+            "gSheetAdvance": "gSheetAdvance.js"
+        },
+        "version": ">=1.0.0"
+    },
+    "dependencies": {
+        "googleapis": "^92.0.0"
+    }
+}
