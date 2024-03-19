@@ -1,7 +1,7 @@
 # ![Google Sheets Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Google_Sheets_2020_Logo.svg/50px-Google_Sheets_2020_Logo.svg.png) node-red-contrib-google-sheets-advance
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Donate](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange.svg)](https://www.buymeacoffee.com/your-username)
+[![Donate](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange.svg)](https://www.buymeacoffee.com/rajansaumya)
 
 A versatile Node-RED node for interacting with Google Sheets, supporting features like reading, writing, appending, clearing, adding, and removing sheets.
 
@@ -12,6 +12,7 @@ A versatile Node-RED node for interacting with Google Sheets, supporting feature
 - [Auth](#auth)
 - [Sheets](#sheets)
 - [Cells](#cells)
+- [Add/Remove Sheet](#add/remove-sheet)
 - [Credits](#credits)
 - [Future Plans](#future-plans)
 - [Feature Requests](#feature-requests)
@@ -55,7 +56,7 @@ Referencing cells in Google Sheets:
 - The format is `Sheet1!A1:C3`, where `Sheet1` is the sheet name, `!` indicates the cell range, and `A1:C3` specifies the cells.
 - A range of cells can be a row (e.g., `A1:A5`), a column (e.g., `A1:E1`), or a block (e.g., `A1:C3`).
 
-## Additional Features
+## Add/Remove Sheet
 
 ### Adding a Sheet
 
@@ -63,7 +64,7 @@ To add a new sheet to the workbook, simply pass the desired name for the sheet t
 
 ### Removing a Sheet
 
-To remove a sheet from the workbook, `gid` if the desired sheet must be provided, example : `https://docs.google.com/spreadsheets/d/1VNwh8mkh5AruBkzdj46Tvjaes2d16OrtY8uNidY8Dhw/edit#gid=1342222962`
+To remove a sheet from the workbook, `gid` if the desired sheet must be provided, example : `https://docs.google.com/spreadsheets/d/your-sheet-id/edit#gid=1342222962`
 
 ## Credits
 
@@ -79,11 +80,11 @@ Our future plans for this tool include:
 
 ## Feature Requests
 
-If you have any feature requests or suggestions, please [open an issue](https://github.com/your-username/your-repo-name/issues) on GitHub. We welcome your feedback and ideas!
+If you have any feature requests or suggestions, please [open an issue](https://github.com/rajansaumya/node-red-contrib-google-sheets-advance/issues) on GitHub. We welcome your feedback and ideas!
 
 ## Support
 
-For support or questions, you can [contact us](mailto:your-email@example.com) directly.
+For support or questions, you can [contact us](mailto:rajan.saumya33@gmail.com) directly.
 
 ## License
 
