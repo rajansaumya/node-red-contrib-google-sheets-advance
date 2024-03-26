@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-google-sheets-advance",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Nodered node for reading, writing, appending, clearing, adding, and removing sheets",
     "author": "Saumya Rajan",
     "license": "MIT",
