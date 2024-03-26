@@ -144,22 +144,37 @@ module.exports = function (RED) {
               });
               break;
             case 'deleteSheet':
-              sheets.spreadsheets.batchUpdate({
+              sheets.spreadsheets.get({
                 auth: jwtClient,
                 spreadsheetId: sheet,
-                resource: {
-                  requests: [{
-                    deleteSheet: {
-                      sheetId: cells // Sheet ID to delete
-                    }
-                  }]
-                }
-              }, function (err, response) {
+                fields: 'sheets.properties.title,sheets.properties.sheetId'
+              }, (err, res) => {
                 if (err) {
-                  node.error('The API returned an error: ' + err, msg);
+                  node.error('Error retrieving sheet list: ' + err, msg);
                 } else {
-                  msg.payload = 'Sheet deleted: ' + cells;
-                  node.send(msg);
+                  const sheetList = res.data.sheets;
+                  const targetSheetName = cells; // Sheet name to delete
+                  const targetSheet = sheetList.find(sheet => sheet.properties.title === targetSheetName);
+                  if (targetSheet) {
+                    const sheetId = targetSheet.properties.sheetId;
+                    // Delete sheet by ID
+                    sheets.spreadsheets.batchUpdate({
+                      auth: jwtClient,
+                      spreadsheetId: sheet,
+                      resource: {
+                        requests: [{ deleteSheet: { sheetId: sheetId } }]
+                      }
+                    }, (err, response) => {
+                      if (err) {
+                        node.error('Error deleting sheet: ' + err, msg);
+                      } else {
+                        msg.payload = 'Sheet deleted: ' + targetSheetName;
+                        node.send(msg);
+                      }
+                    });
+                  } else {
+                    node.error('Sheet not found: ' + targetSheetName, msg);
+                  }
                 }
               });
               break;
@@ -171,8 +186,6 @@ module.exports = function (RED) {
       });
     });
   }
-
-
 
   function gauth(n) {
     RED.nodes.createNode(this, n);

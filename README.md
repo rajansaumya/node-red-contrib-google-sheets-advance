@@ -58,13 +58,9 @@ Referencing cells in Google Sheets:
 
 ## Add/Remove Sheet
 
-### Adding a Sheet
+### Adding and Remove a Sheet
 
-To add a new sheet to the workbook, simply pass the desired name for the sheet to be added to the workbook in `msg.cells`.
-
-### Removing a Sheet
-
-To remove a sheet from the workbook, `gid` if the desired sheet must be provided, example : `https://docs.google.com/spreadsheets/d/your-sheet-id/edit#gid=1342222962`
+To add/remove a sheet from the workbook, simply pass the desired name for the sheet to be added/removed from the workbook in `msg.cells`.
 
 ## Credits
 
@@ -74,7 +70,6 @@ This tool is built upon code references and inspiration from the [node-red-contr
 
 Our future plans for this tool include:
 
-- Delete sheets using their names instead of gids.
 - Enhancing user interface for better usability.
 - Adding support for additional Google Sheets API functionalities.
 
