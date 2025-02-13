@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-google-sheets-advance",
-    "version": "0.0.4",
+    "version": "0.0.7",
     "description": "Nodered node for reading, writing, appending, clearing, adding, and removing sheets",
     "author": "Saumya Rajan",
     "license": "MIT",
@@ -10,7 +10,7 @@
         "url": "git://github.com/rajansaumya/node-red-contrib-google-sheets-advance.git"
     },
     "engines": {
-        "node": ">=12.0.0"
+        "node": ">=16.0.0"
     },
     "keywords": [
         "node-red",
@@ -23,9 +23,9 @@
         "nodes": {
             "gSheetAdvance": "gSheetAdvance.js"
         },
-        "version": ">=1.0.0"
+        "version": ">=2.0.0"
     },
     "dependencies": {
-        "googleapis": "^134.0.0"
+        "googleapis": "^144.0.0"
     }
 }
