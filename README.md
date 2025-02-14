@@ -12,7 +12,8 @@ A versatile Node-RED node for interacting with Google Sheets, supporting feature
 - [Auth](#auth)
 - [Sheets](#sheets)
 - [Cells](#cells)
-- [Add/Remove Sheet](#add/remove-sheet)
+- [Add/Remove Sheet](#add-remove-sheet)
+- [Download Sheet](#download-sheet)
 - [Credits](#credits)
 - [Future Plans](#future-plans)
 - [Feature Requests](#feature-requests)
@@ -23,7 +24,7 @@ A versatile Node-RED node for interacting with Google Sheets, supporting feature
 
 Install via nodered pallete or run the following command in the root directory of your Node-RED install
 
-```
+```sh
 npm install node-red-contrib-google-sheets-advance
 ```
 
@@ -32,6 +33,17 @@ npm install node-red-contrib-google-sheets-advance
 Configure the node with your Google service account credentials and the desired method (e.g., get, update, append, clear, add sheet).
 
 For detailed instructions on setting up authentication, sheet IDs, and cell references, refer to the [Auth](#auth), [Sheets](#sheets), and [Cells](#cells) sections below.
+
+### Google Sheets Node
+
+This node allows you to interact with Google Sheets.
+
+#### Configuration
+
+- **auth**: The authentication node containing the Google API credentials.
+- **spreadsheetId**: The ID of the Google Spreadsheet.
+- **range**: The range of cells to read or write.
+- **operation**: The operation to perform (`get` or `append`).
 
 ## Auth
 
@@ -56,11 +68,19 @@ Referencing cells in Google Sheets:
 - The format is `Sheet1!A1:C3`, where `Sheet1` is the sheet name, `!` indicates the cell range, and `A1:C3` specifies the cells.
 - A range of cells can be a row (e.g., `A1:A5`), a column (e.g., `A1:E1`), or a block (e.g., `A1:C3`).
 
-## Add/Remove Sheet
+## Add Remove Sheet
 
 ### Adding and Remove a Sheet
 
 To add/remove a sheet from the workbook, simply pass the desired name for the sheet to be added/removed from the workbook in `msg.cells`.
+
+## Download Sheet
+
+### In order to download pdf/xls permissions to Google Drive API is required.  
+
+Simply add sheet ID and select pdf or xlsx to be downloaded. Write the buffer data to a file with deired location and file name with correct extension. 
+
+>C:\Users\Admin\.node-red\export.pdf 
 
 ## Credits
 

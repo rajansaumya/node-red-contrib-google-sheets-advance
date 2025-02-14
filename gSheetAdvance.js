@@ -4,18 +4,26 @@ module.exports = function (RED) {
   function gSheet(config) {
     RED.nodes.createNode(this, config);
     var node = this;
-    this.creds = JSON.parse(RED.nodes.getNode(config.creds).credentials.creds);
+
+    try {
+      this.creds = JSON.parse(RED.nodes.getNode(config.creds).credentials.creds);
+    } catch (err) {
+      node.error("Invalid credentials: " + err.message);
+      return;
+    }
+    
     this.method = config.method;
-    this.flatten = config.flatten
+    this.flatten = config.flatten;
+    
     node.on('input', function (msg) {
       if (!config.sheet) {
-        this.sheet = msg.sheet
+        this.sheet = msg.sheet;
       } else {
         this.sheet = config.sheet;
       }
       if (!config.cells) {
         if (msg.cells) {
-          this.cells = msg.cells
+          this.cells = msg.cells;
         }
       } else {
         this.cells = config.cells;
@@ -24,8 +32,10 @@ module.exports = function (RED) {
         this.creds.client_email,
         null,
         this.creds.private_key,
-        ['https://www.googleapis.com/auth/spreadsheets',
-          'https://www.googleapis.com/auth/drive']
+        [
+          'https://www.googleapis.com/auth/spreadsheets',
+          'https://www.googleapis.com/auth/drive'
+        ]
       );
       let sheet = this.sheet;
       let cells = this.cells;
@@ -102,7 +112,7 @@ module.exports = function (RED) {
                 if (err) {
                   node.error('The API returned an error: ' + err, msg);
                 } else {
-                  msg.payload = response.data
+                  msg.payload = response.data;
                   node.send(msg);
                 }
               });
@@ -178,6 +188,69 @@ module.exports = function (RED) {
                 }
               });
               break;
+              case 'downloadPDF': {
+                let drive = google.drive('v3');
+            
+                drive.files.export(
+                    {
+                        auth: jwtClient,
+                        fileId: sheet,
+                        mimeType: 'application/pdf'
+                    },
+                    { responseType: 'stream' },
+                    function (err, response) {
+                        if (err) {
+                            node.error('Error exporting sheet as PDF: ' + err, msg);
+                            return;
+                        }
+            
+                        let data = [];
+                        response.data.on('data', chunk => data.push(chunk)); // Collect chunks of data
+            
+                        response.data.on('end', () => {
+                            msg.payload = Buffer.concat(data); // Combine all chunks into a single buffer
+                            node.send(msg); // Send the file buffer to the next node
+                        });
+            
+                        response.data.on('error', err => {
+                            node.error('Error reading PDF stream: ' + err, msg);
+                        });
+                    }
+                );
+            }
+            break;
+            
+            case 'downloadXLS': {
+                let drive = google.drive('v3');
+            
+                drive.files.export(
+                    {
+                        auth: jwtClient,
+                        fileId: sheet,
+                        mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                    },
+                    { responseType: 'stream' },
+                    function (err, response) {
+                        if (err) {
+                            node.error('Error exporting sheet as XLS: ' + err, msg);
+                            return;
+                        }
+            
+                        let data = [];
+                        response.data.on('data', chunk => data.push(chunk));
+            
+                        response.data.on('end', () => {
+                            msg.payload = Buffer.concat(data); 
+                            node.send(msg); 
+                        });
+            
+                        response.data.on('error', err => {
+                            node.error('Error reading XLS stream: ' + err, msg);
+                        });
+                    }
+                );
+            }
+            break;      
             default:
               node.error('Invalid method specified', msg);
               break;
@@ -197,7 +270,7 @@ module.exports = function (RED) {
       creds: { type: "text" }
     }
   });
-}
+};
 
 function flatten(arr) {
   if (arr.length == 1 && arr[0].length == 1) {
@@ -207,6 +280,6 @@ function flatten(arr) {
   } else if (arr.length == 1 && arr[0].length != 1) {
     return arr.reduce((acc, val) => acc.concat(val), []);
   } else {
-    return arr
+    return arr;
   }
 }
