@@ -1,0 +1,452 @@
+[
+    {
+        "id": "b634980fb93a4bec",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5b177ef5d5b3744e",
+        "type": "group",
+        "z": "b634980fb93a4bec",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "418843843307c136",
+            "b118a2b5fb4e696a",
+            "881e58c135d20540",
+            "411003e7ff7423cf",
+            "38495f8dc6db6539",
+            "f30eafa873b2da04",
+            "e51dcb8be1d33116",
+            "3ac16af5e9e68c17",
+            "3db5f775648bce6b",
+            "d15656d678f7e577",
+            "77221d4ac4e0d1f5",
+            "af1be6c670ad5097",
+            "d184bf8909fbeb6a",
+            "ce460df4823dcdea",
+            "723889d815224181",
+            "48e51ba7895bc3f2",
+            "30f74eadc902cbde",
+            "a35310db8b48e84d",
+            "b0d41a3a20b06d75",
+            "ad5af86146dcfc54"
+        ],
+        "x": 54,
+        "y": 19,
+        "w": 872,
+        "h": 582
+    },
+    {
+        "id": "418843843307c136",
+        "type": "GSheetAdvance",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "creds": "1680dd410a4ee288",
+        "method": "update",
+        "action": "",
+        "sheet": "13RRG24_2zOEj3iupoJi1y3113-hZDmOmJMpb7n-7vm4",
+        "cells": "Sheet1!A2:C3",
+        "flatten": false,
+        "name": "",
+        "x": 410,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b118a2b5fb4e696a",
+        "type": "inject",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "hello 321",
+        "payloadType": "str",
+        "x": 160,
+        "y": 260,
+        "wires": [
+            [
+                "418843843307c136"
+            ]
+        ]
+    },
+    {
+        "id": "881e58c135d20540",
+        "type": "GSheetAdvance",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "creds": "1680dd410a4ee288",
+        "method": "clear",
+        "action": "",
+        "sheet": "13RRG24_2zOEj3iupoJi1y3113-hZDmOmJMpb7n-7vm4",
+        "cells": "Sheet1",
+        "flatten": false,
+        "name": "",
+        "x": 400,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "411003e7ff7423cf",
+        "type": "inject",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 320,
+        "wires": [
+            [
+                "881e58c135d20540"
+            ]
+        ]
+    },
+    {
+        "id": "38495f8dc6db6539",
+        "type": "GSheetAdvance",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "creds": "1680dd410a4ee288",
+        "method": "deleteSheet",
+        "action": "",
+        "sheet": "13RRG24_2zOEj3iupoJi1y3113-hZDmOmJMpb7n-7vm4",
+        "cells": "Sheet4",
+        "flatten": false,
+        "name": "",
+        "x": 420,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f30eafa873b2da04",
+        "type": "inject",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 440,
+        "wires": [
+            [
+                "38495f8dc6db6539"
+            ]
+        ]
+    },
+    {
+        "id": "e51dcb8be1d33116",
+        "type": "GSheetAdvance",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "creds": "1680dd410a4ee288",
+        "method": "downloadPDF",
+        "action": "",
+        "sheet": "13RRG24_2zOEj3iupoJi1y3113-hZDmOmJMpb7n-7vm4",
+        "cells": "Sheet1",
+        "flatten": false,
+        "name": "",
+        "x": 430,
+        "y": 500,
+        "wires": [
+            [
+                "77221d4ac4e0d1f5"
+            ]
+        ]
+    },
+    {
+        "id": "3ac16af5e9e68c17",
+        "type": "inject",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 500,
+        "wires": [
+            [
+                "e51dcb8be1d33116"
+            ]
+        ]
+    },
+    {
+        "id": "3db5f775648bce6b",
+        "type": "GSheetAdvance",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "creds": "1680dd410a4ee288",
+        "method": "downloadXLS",
+        "action": "",
+        "sheet": "13RRG24_2zOEj3iupoJi1y3113-hZDmOmJMpb7n-7vm4",
+        "cells": "Sheet1",
+        "flatten": false,
+        "name": "",
+        "x": 430,
+        "y": 560,
+        "wires": [
+            [
+                "af1be6c670ad5097"
+            ]
+        ]
+    },
+    {
+        "id": "d15656d678f7e577",
+        "type": "inject",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 560,
+        "wires": [
+            [
+                "3db5f775648bce6b"
+            ]
+        ]
+    },
+    {
+        "id": "77221d4ac4e0d1f5",
+        "type": "file",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "name": "",
+        "filename": "C:\\Users\\Admin\\.node-red\\export.pdf",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 750,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "af1be6c670ad5097",
+        "type": "file",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "name": "",
+        "filename": "C:\\Users\\Admin\\.node-red\\export.xlsx",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 750,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d184bf8909fbeb6a",
+        "type": "GSheetAdvance",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "creds": "1680dd410a4ee288",
+        "method": "get",
+        "action": "",
+        "sheet": "",
+        "cells": "",
+        "flatten": false,
+        "name": "",
+        "x": 390,
+        "y": 140,
+        "wires": [
+            [
+                "30f74eadc902cbde"
+            ]
+        ]
+    },
+    {
+        "id": "ce460df4823dcdea",
+        "type": "inject",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "name": "",
+        "props": [
+            {
+                "p": "cells",
+                "v": "Sheet1!A2:C3",
+                "vt": "str"
+            },
+            {
+                "p": "sheet",
+                "v": "13RRG24_2zOEj3iupoJi1y3113-hZDmOmJMpb7n-7vm4",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "d184bf8909fbeb6a"
+            ]
+        ]
+    },
+    {
+        "id": "723889d815224181",
+        "type": "GSheetAdvance",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "creds": "1680dd410a4ee288",
+        "method": "append",
+        "action": "",
+        "sheet": "13RRG24_2zOEj3iupoJi1y3113-hZDmOmJMpb7n-7vm4",
+        "cells": "Sheet1!A2:C3",
+        "flatten": false,
+        "name": "",
+        "x": 410,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "48e51ba7895bc3f2",
+        "type": "inject",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "hello 123",
+        "payloadType": "str",
+        "x": 160,
+        "y": 200,
+        "wires": [
+            [
+                "723889d815224181"
+            ]
+        ]
+    },
+    {
+        "id": "30f74eadc902cbde",
+        "type": "debug",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "a35310db8b48e84d",
+        "type": "GSheetAdvance",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "creds": "1680dd410a4ee288",
+        "method": "createSheet",
+        "action": "",
+        "sheet": "13RRG24_2zOEj3iupoJi1y3113-hZDmOmJMpb7n-7vm4",
+        "cells": "Sheet4",
+        "flatten": false,
+        "name": "",
+        "x": 420,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b0d41a3a20b06d75",
+        "type": "inject",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "a35310db8b48e84d"
+            ]
+        ]
+    },
+    {
+        "id": "ad5af86146dcfc54",
+        "type": "comment",
+        "z": "b634980fb93a4bec",
+        "g": "5b177ef5d5b3744e",
+        "name": "Examples",
+        "info": "",
+        "x": 140,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "1680dd410a4ee288",
+        "type": "gauthAdv",
+        "name": "Unknown"
+    }
+]
