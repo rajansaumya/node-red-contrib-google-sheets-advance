@@ -54,6 +54,37 @@ Follow these steps to set up authentication:
 3. Give the service account access to the Google Sheets API.
 4. Share your sheet with the email address of the service account (e.g., `sheet-builder@example-413410.iam.gserviceaccount.com`).
 
+## Auth
+
+Follow these steps to set up authentication:
+
+1. Create a new service account from [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts).
+2. Download the JSON credentials file for the service account.
+3. Give the service account access to the Google Sheets API.
+4. Share your sheet with the email address of the service account (e.g., `sheet-builder@example-413410.iam.gserviceaccount.com`).
+
+> ⚠️ **Important Note**: If service account key creation is disabled in your organization, follow the steps below to enable it:
+
+### Enabling Service Account Key Creation
+
+If you encounter a message stating that **"Service account key creation is disabled"**, follow these steps:
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/).
+2. Click to select your project/organization.
+3. Click the three-dot menu (⋮) next to the organization name and select **IAM/PERMISSIONS**.
+4. Edit your user and add the following roles:
+   - **Organization Policy Administrator**
+   - **Organization Administrator**
+
+> 📝 Note: These roles must be added at the **organization level** to be effective. If you're at the **project level**, you might not see the required policies.
+
+5. After assigning the roles, go to **IAM & Admin > Organization Policies**.
+6. Search for the policy **"Disable service account key creation"**.
+7. Click on **Edit Policy** and change the rule to allow key creation.
+
+More details: [Reddit thread](https://www.reddit.com/r/googleworkspace/comments/1biw03d/service_account_key_creation_is_disabled/)
+
+
 ## Sheets
 
 To find the sheet ID:
