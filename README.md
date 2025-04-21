@@ -3,6 +3,8 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Donate](https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange.svg)](https://www.buymeacoffee.com/rajansaumya)
 
+### In order to download xls one has to enable Google Drive API. 
+
 A versatile Node-RED node for interacting with Google Sheets, supporting features like reading, writing, appending, clearing, adding, and removing sheets.
 
 ## Table of Contents
