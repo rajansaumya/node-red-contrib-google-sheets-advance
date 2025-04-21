@@ -44,16 +44,7 @@ This node allows you to interact with Google Sheets.
 - **spreadsheetId**: The ID of the Google Spreadsheet.
 - **range**: The range of cells to read or write.
 - **operation**: The operation to perform (`get` or `append`).
-
-## Auth
-
-Follow these steps to set up authentication:
-
-1. Create a new service account from [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts).
-2. Download the JSON credentials file for the service account.
-3. Give the service account access to the Google Sheets API.
-4. Share your sheet with the email address of the service account (e.g., `sheet-builder@example-413410.iam.gserviceaccount.com`).
-
+  
 ## Auth
 
 Follow these steps to set up authentication:
