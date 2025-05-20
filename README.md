@@ -56,15 +56,6 @@ Follow these steps to set up authentication:
 3. Give the service account access to the Google Sheets API.
 4. Share your sheet with the email address of the service account (e.g., `sheet-builder@example-413410.iam.gserviceaccount.com`).
 
-## Auth
-
-Follow these steps to set up authentication:
-
-1. Create a new service account from [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts).
-2. Download the JSON credentials file for the service account.
-3. Give the service account access to the Google Sheets API.
-4. Share your sheet with the email address of the service account (e.g., `sheet-builder@example-413410.iam.gserviceaccount.com`).
-
 > ⚠️ **Important Note**: If service account key creation is disabled in your organization, follow the steps below to enable it:
 
 ### Enabling Service Account Key Creation
